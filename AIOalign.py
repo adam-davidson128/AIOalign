@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+
 """
 AIOalign5.6.py - Automated DNA sequence alignment with ORF optimization
 
-This program performs sophisticated DNA sequence alignment by:
+This program performs a DNA sequence alignment by:
 1. Finding all possible open reading frames (ORFs) in input sequences
 2. Trimming untranslated regions (UTRs) for each ORF
 3. Translating sequences to amino acids
@@ -12,9 +14,6 @@ This program performs sophisticated DNA sequence alignment by:
 
 The process preserves codon degeneracy and silent mutation information while
 leveraging the advantages of amino acid alignment for proper reading frame maintenance.
-
-Author: Adam Davidson
-Version: 5.6
 """
 
 import argparse
@@ -166,8 +165,8 @@ class AlignmentProcessor:
         aligner.mode = 'local'
         aligner.match_score = 2
         aligner.mismatch_score = -3
-        aligner.open_gap_score = -45
-        aligner.extend_gap_score = -4
+        aligner.open_gap_score = -65
+        aligner.extend_gap_score = -40
         
         alignment = aligner.align(clean_seq1, clean_seq2)[0]
         
@@ -190,7 +189,7 @@ class AlignmentProcessor:
             'mid': -2,          # Normal penalty for middle region
             'c_term': -3        # Moderate penalty for C-terminal gaps
         }
-        
+    
         # Calculate alignment score with regional weighting
         raw_score = 0
         for i, (a, b) in enumerate(zip(alignment[0], alignment[1])):
@@ -559,10 +558,6 @@ class AIOalign:
             logging.info("Translating sequences")
             protein_sequences = SequenceProcessor.translate_sequences(selected_orfs)
             SeqIO.write(protein_sequences, self.protein_file, "fasta")
-            
-            # Perform final alignment
-            logging.info("Running Clustal Omega alignment")
-            AlignmentProcessor.run_clust
             
             # Perform final alignment
             logging.info("Running Clustal Omega alignment")
