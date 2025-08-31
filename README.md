@@ -109,9 +109,3 @@ python AIOalign.py input.fasta \
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-Adam Davidson - adam.davidson128@gmail.com
-
-Project Link: https://github.com/adam-davidson128/AIOalign
